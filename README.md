@@ -16,11 +16,16 @@ const Aseprite = require('aseprite');
 const fs = require('fs');
 const contents = fs.readFileSync('my-sprite.ase');
 
-const ase = Aseprite.parse(contents);
+const ase = Aseprite.parse(contents, {
+	clean: true // default; set to false if you want to retain buffer information
+	inflate: true // default; set to false if you want to skip Zlib inflation
+});
 
-// Optionally, remove all of the meta properties from the object if you don't need them.
-// Required if you want to serialize to JSON.
-const cleanAse = Aseprite.clean(Aseprite.parse(contents));
+// If you didn't clean before, you can manually do so:
+const cleanedAse = Aseprite.clean(ase);
+
+// If you didn't inflate before, you can manually do so:
+const inflatedAse = Asprite.inflate(ase);
 
 // Dump it to the console
 console.log(require('util').inspect(cleanAse, {depth: null, colors: true}));
