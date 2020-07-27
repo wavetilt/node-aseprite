@@ -23,5 +23,6 @@ compiler.compile('javascript', ksy, null, false).then(files => {
 	console.log('DONE');
 }).catch(error => {
 	console.error(error.stack);
+	// eslint-disable-next-line unicorn/no-process-exit
 	process.exit(1);
 });
