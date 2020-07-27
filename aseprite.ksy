@@ -587,13 +587,9 @@ types:
               - id: pixels_compressed
                 if: type == cel_type_enum::compressed
                 size: _parent.size - 26
-                # NOTE: Uncomment if you have zlib available
-                #       and you'd like to have Kaitai do automatic
-                #       inflation for you.
-                #process: zlib
                 doc: |
-                  The raw pixel data (inflated if `process: zlib` was uncommented
-                  in the Kaitai definition file prior to creating the parser).
+                  The compressed pixel data. Must be inflated (Kaitai does not
+                  support this out of the box).
 
                   NOTE: This is raw byte data because Kaitai cannot accurately
                   represent the variable types here. You will need to check
