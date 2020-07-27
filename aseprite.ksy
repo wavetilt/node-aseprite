@@ -537,7 +537,7 @@ types:
                 doc: |
                   Opacity level
               - id: type
-                type: u1
+                type: u2
                 enum: cel_type_enum
                 doc: |
                   The format of the cel's contents
@@ -553,7 +553,7 @@ types:
                 doc: |
                   The cel height in pixels
               - id: pixels
-                size: _parent.size - 25
+                size: _parent.size - 26
                 if: type == cel_type_enum::raw
                 doc: |
                   The cel's pixel data
@@ -574,8 +574,6 @@ types:
                 if: type == cel_type_enum::linked
                 doc: |
                   The frame position to link with
-              - size: 1 # undocumented extra byte?
-                if: type == cel_type_enum::linked
               - id: width
                 type: u2
                 if: type == cel_type_enum::compressed
@@ -588,7 +586,7 @@ types:
                   The height in pixels
               - id: pixels_compressed
                 if: type == cel_type_enum::compressed
-                size: _parent.size - 25
+                size: _parent.size - 26
                 # NOTE: Uncomment if you have zlib available
                 #       and you'd like to have Kaitai do automatic
                 #       inflation for you.
