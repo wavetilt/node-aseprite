@@ -535,7 +535,7 @@ types:
               - id: opacity
                 type: u1
                 doc: |
-                  Opacity level
+                  Opacity level (0-255)
               - id: type
                 type: u2
                 enum: cel_type_enum
