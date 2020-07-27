@@ -25,7 +25,7 @@ const ase = Aseprite.parse(contents, {
 const cleanedAse = Aseprite.clean(ase);
 
 // If you didn't inflate before, you can manually do so:
-const inflatedAse = Asprite.inflate(ase);
+const inflatedAse = Aseprite.inflate(ase);
 
 // Dump it to the console
 console.log(require('util').inspect(cleanAse, {depth: null, colors: true}));
