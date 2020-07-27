@@ -21,4 +21,7 @@ compiler.compile('javascript', ksy, null, false).then(files => {
 	fs.writeFileSync('aseprite.js', files['Aseprite.js']);
 
 	console.log('DONE');
+}).catch(error => {
+	console.error(error.stack);
+	process.exit(1);
 });
