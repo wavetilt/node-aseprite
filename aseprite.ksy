@@ -164,63 +164,22 @@ types:
             enum: chunk_type_enum
             doc: |
               The chunk type
-          - id: color_profile
-            type: color_profile_chunk
-            if: type == chunk_type_enum::color_profile
-            doc: |
-              The color profile information for the sprite
-          - id: palette
-            type: palette_chunk
-            if: type == chunk_type_enum::palette
-            doc: |
-              The new palette information for the sprite
-              (use this palette entry over the old palette entries,
-              since Aseprite will include the old versions for compatibility
-              reasons).
-          - id: palette_old
-            type: palette_old_chunk
-            if: |
-              type == chunk_type_enum::palette_old_1 or type == chunk_type_enum::palette_old_2
-            doc: |
-              The old palette information for the sprite
-              (prefer type==palette chunks, if possible)
-          - id: layer
-            type: layer_chunk
-            if: type == chunk_type_enum::layer
-            doc: |
-              A single sprite layer
-          - id: cel
-            type: cel_chunk
-            if: type == chunk_type_enum::cel
-            doc: |
-              A single cel layer
-          - id: cel_extra
-            type: cel_extra_chunk
-            if: type == chunk_type_enum::cel_extra
-            doc: |
-              Extension information to the PREVIOUS cel
-              (this chunk's index - 1)
-          - id: slice
-            type: slice_chunk
-            if: type == chunk_type_enum::slice
-            doc: |
-              A single slice layer
-          - id: tags
-            type: tags_chunk
-            if: type == chunk_type_enum::tags
-            doc: |
-              A single tags layer
-          - id: userdata
-            type: userdata_chunk
-            if: type == chunk_type_enum::userdata
-            doc: |
-              A userdata layer adding text or color annotation information
-              to the PREVIOUS layer.
-          - id: mask
-            type: mask_chunk
-            if: type == chunk_type_enum::mask
-            doc: |
-              DEPRECATED: Mask information for the sprite
+          - id: data
+            type:
+              switch-on: type
+              cases:
+                'chunk_type_enum::palette_old_1': palette_old_chunk
+                'chunk_type_enum::palette_old_2': palette_old_chunk
+                'chunk_type_enum::layer': layer_chunk
+                'chunk_type_enum::cel': cel_chunk
+                'chunk_type_enum::cel_extra': cel_extra_chunk
+                'chunk_type_enum::color_profile': color_profile_chunk
+                'chunk_type_enum::mask': mask_chunk
+                'chunk_type_enum::tags': tags_chunk
+                'chunk_type_enum::palette': palette_chunk
+                'chunk_type_enum::userdata': userdata_chunk
+                'chunk_type_enum::slice': slice_chunk
+                _: dummy_chunk
         enums:
           chunk_type_enum:
             0x0004: palette_old_1
@@ -236,6 +195,9 @@ types:
             0x2020: userdata
             0x2022: slice
         types:
+          dummy_chunk:
+            seq:
+              - size: _parent.size - 6
           palette_chunk:
             seq:
               - id: num_entries
@@ -317,12 +279,12 @@ types:
               - size: 8
               - id: icc_length
                 type: u4
-                if: type == type_enum::icc
+                if: type == type_enum::embedded_icc
                 doc: |
                   ICC profile data length
               - id: icc_data
                 size: icc_length
-                if: type == type_enum::icc
+                if: type == type_enum::embedded_icc
                 doc: |
                   ICC profile data. More info: http://www.color.org/ICC1V42.pdf
             enums:

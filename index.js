@@ -39,7 +39,7 @@ function inflate(ase) {
 	for (const frame of ase.frames) {
 		for (const chunk of frame.chunks) {
 			if (chunk.type === ChunkTypeEnum.CEL) {
-				const cel = chunk.cel;
+				const cel = chunk.data;
 				if (cel.type === CelTypeEnum.COMPRESSED) {
 					cel.pixels = zlib.inflateSync(cel.pixelsCompressed);
 				}
