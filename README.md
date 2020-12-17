@@ -28,7 +28,7 @@ const cleanedAse = Aseprite.clean(ase);
 const inflatedAse = Aseprite.inflate(ase);
 
 // Dump it to the console
-console.log(require('util').inspect(cleanAse, {depth: null, colors: true}));
+console.log(require('util').inspect(ase, {depth: null, colors: true}));
 ```
 
 # License
