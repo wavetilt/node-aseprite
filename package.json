@@ -1,6 +1,6 @@
 {
   "name": "aseprite",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Aseprite file format parser",
   "main": "index.js",
   "scripts": {
