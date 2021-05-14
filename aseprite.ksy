@@ -647,6 +647,7 @@ types:
                     type: b1
                     doc: |
                       It's a 9-patches slice
+                  - type: b24
               key:
                 seq:
                   - id: frame_no
